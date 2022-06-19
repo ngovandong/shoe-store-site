@@ -6,7 +6,7 @@ import vuetify from './plugins/vuetify'
 import axios from 'axios'
 
 Vue.config.productionTip = false
-axios.defaults.baseURL = "http://ngovandong.pythonanywhere.com/"
+axios.defaults.baseURL = "//ngovandong.pythonanywhere.com/"
 new Vue({
   router,
   store,
