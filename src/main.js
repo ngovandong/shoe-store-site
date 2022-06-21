@@ -6,7 +6,7 @@ import vuetify from './plugins/vuetify'
 import axios from 'axios'
 
 Vue.config.productionTip = false
-axios.defaults.baseURL = "//b79f-203-205-51-183.ap.ngrok.io/"
+axios.defaults.baseURL = "//4956-45-122-236-90.ap.ngrok.io/"
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 new Vue({
   router,
