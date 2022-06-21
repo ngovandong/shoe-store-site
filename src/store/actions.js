@@ -5,6 +5,7 @@ export default {
       headers: {
         "Host": "b27a-118-69-61-78.ap.ngrok.io",
       }
+
     }
     fetchShoes(context)
     {
