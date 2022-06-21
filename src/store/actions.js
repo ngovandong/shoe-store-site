@@ -1,10 +1,14 @@
 import router from '../router'
 import axios from 'axios'
 export default {
-
+    let config = {
+      headers: {
+        "Host": "b27a-118-69-61-78.ap.ngrok.io",
+      }
+    }
     fetchShoes(context)
     {
-        return axios.get("shoes/").then(res =>
+        return axios.get("shoes/", config).then(res =>
             context.commit("setlistShoe", res.data)
         ).catch((error) => console.log(error));
     },
