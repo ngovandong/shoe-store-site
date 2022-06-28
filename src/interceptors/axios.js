@@ -1,7 +1,7 @@
 import axios from "axios"
 import store from "../store"
 
-const baseURL = "http://3d-shoe.azurewebsites.net"
+const baseURL = "//3d-shoe.azurewebsites.net"
 axios.defaults.baseURL = baseURL
 // axios.defaults.withCredentials = true
 
