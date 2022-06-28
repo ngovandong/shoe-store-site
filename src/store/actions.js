@@ -1,5 +1,7 @@
 import router from '../router'
 import axios from 'axios'
+import { privateAxios } from '@/interceptors/axios';
+
 export default {
 
     fetchShoes(context)
@@ -10,7 +12,7 @@ export default {
     },
     fetchCart(context)
     {
-        return axios.get("cart_details/").then(res =>
+        return privateAxios.get("cart_details/").then(res =>
             context.commit("setCart", res.data)
         ).catch((error) => console.log(error));
     },
@@ -24,21 +26,22 @@ export default {
     {
         context.dispatch("fetchCategory")
         context.dispatch("fetchShoes")
-        context.dispatch("fetchCart")
+        if (context.state.isAuthenticated) {
+            context.dispatch("fetchCart")
+        }
     },
     login(context, user)
     {
         return axios
-            .post("token/login/", user)
+            .post("api/token/", user)
             .then(response =>
             {
-                const token = response.data.auth_token
+                const token = response.data
                 context.commit('setToken', token)
-                axios.defaults.headers.common["Authorization"] = "Token " + token
+                axios.defaults.headers.common["Authorization"] = "Bearer " + token.access
                 const toPath = router.history.current.query.to || '/'
                 router.push(toPath)
             })
-
     },
     signup(context, person)
     {
@@ -46,6 +49,15 @@ export default {
             .post("signup/", person)
             .then(
                 () => router.push('/login')
+            )
+    },
+    refreshToken(context)
+    {
+        return axios.post('api/token/refresh/', { refresh: context.state.token.refresh })
+            .then(res =>
+                context.commit("setToken", res.data)
+            ).catch(
+                error => console.log(error)
             )
     }
 }

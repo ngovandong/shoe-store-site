@@ -3,10 +3,12 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
-import axios from 'axios'
+import './interceptors/axios'
 
 Vue.config.productionTip = false
-axios.defaults.baseURL = "//ngovandong.pythonanywhere.com/"
+
+
+
 new Vue({
   router,
   store,

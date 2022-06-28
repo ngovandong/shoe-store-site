@@ -38,9 +38,10 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import { privateAxios } from "@/interceptors/axios";
 import { mapGetters, mapActions } from "vuex";
 import ProductCart from "./ProductCart.vue";
+
 export default {
   props: ["closeCart"],
   components: { ProductCart },
@@ -51,7 +52,7 @@ export default {
   methods: {
     ...mapActions(["fetchCart"]),
     orderhandle() {
-      axios
+      privateAxios
         .post("sales/", {})
         .then(() => {
           this.fetchCart();

@@ -55,7 +55,7 @@
 <script>
 import { mapMutations } from "vuex";
 import SaleTable from "@/components/SaleTable.vue";
-import axios from "axios";
+import { privateAxios } from "@/interceptors/axios";
 export default {
   components: { SaleTable },
   data() {
@@ -77,21 +77,21 @@ export default {
         date: data.date.slice(0, 10),
         details: data.details.map((detail) => ({
           qty: detail.qty,
-          name: detail.stock.shoe.name,
-          price: detail.stock.shoe.price,
-          size: detail.stock.size,
-          total: detail.stock.shoe.price * detail.qty,
+          name: detail.shoe_name,
+          price: detail.shoe_price,
+          size: detail.size,
+          total: detail.shoe_price * detail.qty,
         })),
       }));
     },
     fetchInfor() {
-      axios
+      privateAxios
         .get("customers/get_own_data/")
         .then((res) => (this.user = res.data))
         .catch((error) => console.log(error));
     },
     fetchSales() {
-      axios
+      privateAxios
         .get("sales/")
         .then((res) => this.setSales(res.data))
         .catch((error) => console.log(error));

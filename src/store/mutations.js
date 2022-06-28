@@ -1,11 +1,10 @@
 export default {
     initializeStore(state)
     {
-        if (localStorage.getItem('token')) {
+        const has = JSON.parse(localStorage.getItem('token'))
+        if (has) {
+            state.token = JSON.parse(localStorage.getItem('token'))
             state.isAuthenticated = true
-            state.token = localStorage.getItem('token')
-        } else {
-            localStorage.setItem('token', '')
         }
     },
     setlistShoe(state, shoes)
@@ -24,7 +23,7 @@ export default {
     {
         state.token = token
         state.isAuthenticated = true
-        localStorage.setItem("token", token)
+        localStorage.setItem("token", JSON.stringify(token))
     },
     setCart(state, items)
     {
@@ -37,8 +36,8 @@ export default {
     logout(state)
     {
         state.user = null
-        state.token = ''
-        localStorage.setItem('token', '')
+        state.token = null
+        localStorage.setItem('token', null)
         state.isAuthenticated = false
     }
 }

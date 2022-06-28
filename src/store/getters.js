@@ -15,7 +15,7 @@ export default {
         {
             let t = 0;
             for (const item of state.cart.items) {
-                t += item.qty * item.stock.shoe.price;
+                t += item.qty * item.shoe_price;
             }
             return t;
         }

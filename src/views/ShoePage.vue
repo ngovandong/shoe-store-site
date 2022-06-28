@@ -69,7 +69,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import { privateAxios } from "@/interceptors/axios";
 import { mapGetters, mapActions, mapState } from "vuex";
 import InforTabs from "../components/InforTabs.vue";
 import ProductTabs from "../components/ProductTabs.vue";
@@ -89,7 +89,7 @@ export default {
     add() {
       if (this.isAuthenticated) {
         const stock = this.shoe.stocks[this.check];
-        axios
+        privateAxios
           .post("cart_details/", { stock: stock.id, qty: 1 })
           .then(() => {
             this.fetchCart();

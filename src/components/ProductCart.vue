@@ -1,18 +1,18 @@
 <template>
   <v-list-item>
     <v-list-item-avatar rounded="0" size="100">
-      <v-img :src="item.stock.shoe.get_thumbnail"></v-img>
+      <v-img :src="item.shoe_image"></v-img>
     </v-list-item-avatar>
 
     <v-list-item-content>
-      <v-list-item-title v-text="item.stock.shoe.name"></v-list-item-title>
+      <v-list-item-title v-text="item.shoe_name"></v-list-item-title>
 
       <v-list-item-subtitle
-        v-text="'size: ' + item.stock.size"
+        v-text="'size: ' + item.size"
       ></v-list-item-subtitle>
       <v-list-item-subtitle
         style="color: #fa5400"
-        v-text="'price: ' + item.stock.shoe.price + '₫'"
+        v-text="'price: ' + item.shoe_price + '₫'"
       ></v-list-item-subtitle>
       <div class="qty-input">
         <span>{{ "qty: " + item.qty }}</span>
@@ -41,9 +41,8 @@
   </v-list-item>
 </template>
 <script>
-import axios from "axios";
+import { privateAxios } from "@/interceptors/axios";
 import { mapActions } from "vuex";
-
 export default {
   props: ["item"],
   data() {
@@ -68,7 +67,7 @@ export default {
       }
     },
     changeQuantity(update) {
-      axios
+      privateAxios
         .patch(`cart_details/${this.item.id}/`, update)
         .then(() => {
           this.fetchCart();
@@ -79,7 +78,7 @@ export default {
         });
     },
     deleteFromCart() {
-      axios
+      privateAxios
         .delete(`cart_details/${this.item.id}/`)
         .then(() => {
           this.fetchCart();

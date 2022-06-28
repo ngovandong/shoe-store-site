@@ -5,6 +5,6 @@ export default {
     searchString: "",
     cart: { items: [] },
     user,
-    token: '',
+    token: null,
     isAuthenticated: false
 }
